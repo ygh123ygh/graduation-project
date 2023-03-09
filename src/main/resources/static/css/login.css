@@ -1,0 +1,73 @@
+.box1{
+    display: block;
+    margin-left: 15px;
+}
+.box2{
+    display:none;
+    margin-left: 15px;
+}
+.asd{
+   color: #00a65a;
+}
+
+/* 清除所有元素的默认外边距和内边距 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 列表 ul 的样式  */
+.nav1 {
+    width: 5000px;
+    margin: 0 auto; /* 整个列表居中显示 */
+    list-style: none;
+}
+
+
+
+/* 列表项 li 的样式  */
+.nav1 .item {
+    float: left;    /* 设置浮动，列表项横向排列 */
+    width: 100px;
+    text-align: center; /* 文本水平居中 */
+    font-size: 20px;
+    color:black;
+    line-height: 40px;  /* 设置行高，文本垂直居中 */
+}
+
+
+/* 伪类选择器，鼠标移入时，对应列表项改变样式 */
+.nav1 .item:hover {
+
+   font-size: 25px;
+
+}
+
+/* 列表项 li 中子导航栏的样式  */
+
+.red {
+    margin-left: 6px;
+    margin-top: 10px;
+    color: #faddde;
+    border: solid 1px #d0161a;
+    background: #d81b21;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ed1c24), to(#aa1317));
+    background: -moz-linear-gradient(top,  #ed1c24,  #aa1317);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed1c24', endColorstr='#aa1317');
+}
+.red:hover {
+    background: #b61318;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c9151b), to(#a11115));
+    background: -moz-linear-gradient(top,  #c9151b,  #a11115);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#c9151b', endColorstr='#a11115');
+}
+.red:active {
+    color: #de898c;
+    background: -webkit-gradient(linear, left top, left bottom, from(#aa1317), to(#ed1c24));
+    background: -moz-linear-gradient(top,  #aa1317,  #ed1c24);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1317', endColorstr='#ed1c24');
+}
+
+
+
+
