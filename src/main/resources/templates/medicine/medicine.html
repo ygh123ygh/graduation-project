@@ -1,0 +1,267 @@
+<!--<!DOCTYPE html >-->
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/layui.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/css/pagination.css">
+</head>
+<body style=" position: fixed;left: 205px ; width: 85%;height: 100%;">
+<div class="box-header with-border">
+    <h3 class="box-title">药品列表</h3>
+    <!--/*@thymesVar id="user" type=""*/-->
+
+</div>
+
+<div class="box-body">
+
+    <th:if test="${USER_SESSION.role =='ADMIN'}">
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
+                            data-target="#addOrEditModal" onclick="box()"> 新增
+                    </button>
+                </div>
+            </div>
+        </div>&nbsp&nbsp&nbsp&nbsp
+    </th:if>
+
+    <!--工具栏 数据搜索<h1 th:text="${user}"/> -->
+    <div class="box-tools pull-right">
+        <div class="has-feedback">
+            <form action="/sel" method="post">
+                用户名称：<input name="name" >&nbsp&nbsp&nbsp&nbsp
+                用户账号：<input name="author" >&nbsp&nbsp&nbsp&nbsp
+
+                <input class="btn btn-default" type="submit" value="查询">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="table-box" >
+    <!-- 数据表格 -->
+    <table id="dataList" class="table table-bordered table-striped table-hover dataTable text-center" >
+        <thead>
+        <tr>
+
+            <th class="sorting">药品编号</th>
+            <th class="sorting">名称</th>
+            <th class="sorting">性味</th>
+            <th class="sorting">功效</th>
+            <th class="sorting">用量</th>
+            <th class="sorting">禁忌</th>
+
+            <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody th:each="user : ${user}" id="ta1">
+
+        <!--/*@thymesVar id="user" type=""*/-->
+        <tr id="qwe">
+
+            <td  th:text="${user.id}" style="width: 8%">
+
+            </td>
+
+            <td th:text="${user.name}" style="width: 13%">></td>
+            <td th:text="${user.taste}"></td>
+            <td th:text="${user.effect}"></td>
+            <td th:text="${user.dosage}"></td>
+            <td th:text="${user.taboo}"></td>
+
+            <td class="text-center" style="width: 14%">
+
+                <button th:if="${role}==1"  type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                        data-target="#borrowModal" onclick="findBookById('borrow')"> 查看更多
+                </button>
+                <button th:if="${role}!=1"  type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                        data-target="#borrowModal" onclick="findBookById('borrow')" disabled="true"> 查看更多
+                </button>
+
+                <button th:if="${role }==1" type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                        data-target="#addOrEditModal"  th:onclick="box3([[${user.id}]],[[${user.name}]],[[${user.taste}]],[[${user.effect}]],[[${user.dosage}]],[[${user.taboo}]])"> 编辑
+                </button>
+                <button th:if="${role }!=1" type="button" class="btn bg-olive btn-xs" data-toggle="modal" disabled="true"
+                        data-target="#addOrEditModal"  th:onclick="box3()"> 编辑
+                </button>
+
+
+
+                <button th:if="${role }==1" type="button" class="btn bg-olive btn-xs" th:onclick="del([[${user.id}]])">删除</button>
+                <button th:if="${role }!=1" type="button" class="btn bg-olive btn-xs" disabled="true">删除</button>
+            </td>
+        </tr>
+
+        </tbody>
+        <div id="demo2"></div>
+        <ul id="biuuu_city_list"></ul>
+    </table>
+
+
+
+
+</div>
+
+
+<!-- 添加和编辑图书的模态窗口 -->
+<div class="modal " id="medadd" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="myModalLabel">药品信息</h3>
+            </div>
+            <div class="modal-body">
+                <form id="add" action="/medadd" method="post">
+
+                    <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                        <tr>
+
+                            <td>药品编号</td>
+                            <td><input class="form-control" placeholder="药品编号" name="id" id="id"></td>
+                            <td>药品名称</td>
+                            <td><input class="form-control" placeholder="药品名称" name="name" id="name"></td>
+                        </tr>
+                        <tr>
+                            <td>药品性味</td>
+                            <td><input class="form-control" placeholder="药品性味" name="taste" id="taste"  >
+
+                            </td>
+                            <td>药品用量</td>
+                            <td><input class="form-control" placeholder="药品用量" name="effect" id="effect"  >
+
+                            </td>
+
+                            <!-- <td>作者</td>
+                             <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+
+                        </tr>
+                        <tr>
+
+                            <td>药品作用</td>
+                            <td><input class="form-control" placeholder="药品作用" name="dosage" id="dosage"  >
+
+                            </td>
+                            <td>药品禁忌</td>
+                            <td><input class="form-control" placeholder="药品禁忌" name="taboo" id="taboo"  >
+
+                            </td>
+                        </tr>
+
+
+                    </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success"  onclick="box1()" type="submit" name="sign">保存
+                        </button>
+                        <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--编辑框-->
+<div th:include="box.html::eitd_med"   ></div>
+</body>
+<script type="text/javascript" th:inline="javascript">
+
+
+
+
+    function resetFrom() {
+        $("#aoe").attr("disabled",true)
+        var $vals=$("#addOrEditBook input");
+        $vals.each(function(){
+            $(this).attr("style","").val("")
+        });
+    }
+    function box(){
+        document.getElementById("medadd").style.display="block";
+    };
+    function box1(){
+
+        document.getElementById("medadd").style.display="none";
+        document.getElementById("edit_med").style.display="none";
+
+    };
+    function box3(id,name,taste,effect,dosage,taboo){
+
+        console.log(id,name,taste,effect,dosage,taboo);
+        document.getElementById("id3").value=id;
+        document.getElementById("name3").value=name;
+        document.getElementById("taste3").value=taste;
+        document.getElementById("effect3").value=effect;
+        document.getElementById("dosage3").value=dosage;
+        document.getElementById("taboo3").value=taboo;
+        document.getElementById("edit_med").style.display="block";
+
+
+
+    };
+    function del(id){
+        var name = [[${id }]];
+        console.log(id);
+
+        window.location.href='/med_del?id='+id;
+
+
+    };
+    function edit() {
+        document.getElementById("box").action='/medup';
+    }
+
+</script>
+<script src="../static/layui.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    console.log([[${msg}]])
+    console.log([[${a}]])
+
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        var aa = [[${a}]]
+        if (aa != null) {
+            if([[${a}]]){
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }else {
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }
+
+
+        }
+        //触发事件
+
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+
+        //多窗口模式 - esc 键
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 27) {
+                layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+            }
+        });
+    })
+</script>
+
+
+
+
+
+</html>

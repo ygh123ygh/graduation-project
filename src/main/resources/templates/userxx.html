@@ -1,0 +1,246 @@
+<!--<!DOCTYPE html >-->
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/layui.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/css/pagination.css">
+    <link rel="stylesheet" href="../../static/css/chatbox.css">
+</head>
+<body style=" position: fixed;left: 205px ; width: 85%;height: 100%;">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="myModalLabel">用户信息编辑</h3>
+        </div>
+        <div class="modal-body" th:each="user : ${user}">
+            <form id="doc_eidt" action="/userup" method="post">
+
+                <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                    <tr>
+
+                        <td>用户编号</td>
+                        <td><input class="form-control" placeholder="姓名" name="id" id="user_id" th:value="${user.name}"></td>
+                        <td>用户姓名</td>
+                        <td><input class="form-control" placeholder="编号" name="name" id="users_name" th:value="${user.id}"></td>
+                    </tr>
+                    <tr>
+                        <td>年龄</td>
+                        <td><input class="form-control" placeholder="年龄" name="age" id="users_age" th:value="${user.age}" >
+
+                        </td>
+                        <td>性别</td>
+                        <td><input class="form-control" placeholder="性别" name="sex" id="users_sex" th:value="${user.sex}" >
+                    </tr>
+                    <tr>
+                        </td>
+                        <td>联系方式</td>
+                        <td><input class="form-control" placeholder="电话" name="phone" id="users_phone" th:value="${user.phone}" >
+
+                        </td>
+                        <!-- <td>作者</td>
+                         <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                        <td>居住地</td>
+                        <td>
+                            <select class="form-control" id="user_live" name="live" th:value="${user.live}">
+                                <option value="北京">北京</option>
+                                <option value="厦门">厦门</option>
+                                <option value="福州">福州</option>
+                                <option value="广州">广州</option>
+                                <option value="成都">成都</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>出生日期</td>
+                        <td><input class="form-control" placeholder="出生日期" name="born" id="users_born" th:value="${user.born}" >
+
+                        </td>
+
+                    </tr>
+
+
+                </table>
+                <div class="modal-footer">
+                    <button class="btn btn-success"  onclick="user_eidt()" type="submit" name="sign">保存
+                    </button>
+                    <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:inline="javascript">
+    function del(yvyid){
+        var name = [[${name}]];
+        console.log(yvyid);
+        window.location.href='/yvy_del?yvyid='+yvyid;
+
+
+    };
+    function box_chuf() {
+
+        document.getElementById("kcf").style.display="block";
+        var yvyid=localStorage.getItem("yvykey");
+        document.getElementById("yvyids").value=yvyid;
+
+    }
+
+    var websocket = null;
+    function zl(yvyid) {
+        console.log(yvyid)
+        localStorage.setItem("yvykey",yvyid);
+
+        document.getElementById("zl").style.display="block";
+        //判断当前浏览器是否支持WebSocket
+        if ('WebSocket'in window) {
+            var nickname = [[${role}]];
+
+            websocket = new WebSocket("ws://localhost:8080/websocket/"+nickname);
+
+        } else {
+            alert('Not support websocket')
+        }
+        //连接发生错误的回调方法
+        websocket.onerror = function() {
+            setMessageInnerHTML("error");
+        };
+        //连接成功建立的回调方法
+        websocket.onopen = function(event) {
+            setMessageInnerHTML("医师已进入诊疗界面");
+        }
+        //接收到消息的回调方法
+        websocket.onmessage = function(event) {
+            setMessageInnerHTML(event.data);
+        }
+        //连接关闭的回调方法
+        websocket.onclose = function() {
+            setMessageInnerHTML("医师已离开诊疗界面");
+        }
+        //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+        window.onbeforeunload = function() {
+            websocket.close();
+        }
+
+    }
+    function boxcf() {
+
+        document.getElementById("kcf").style.display="none";
+
+
+
+    }
+
+    function box1(){
+
+        document.getElementById("zl").style.display="none";
+        document.getElementById("kcf").style.display="none";
+        document.getElementById("eitd_yvy").style.display="none";
+    };
+    function box3(yvyid,userid,username,docid,docname,subject,time,status){
+
+        console.log(yvyid,userid,username,docid,docname,subject,time,status);
+        document.getElementById("yvyid").value=yvyid;
+        document.getElementById("userid").value=userid;
+        document.getElementById("username").value=username;
+        document.getElementById("docid").value=docid;
+        document.getElementById("docname").value=docname;
+        document.getElementById("subject").value=subject;
+        document.getElementById("time").value=time;
+        document.getElementById("status").value=status;
+        document.getElementById("eitd_yvy").style.display="block";
+
+
+
+    };
+    function resetFrom() {
+        $("#aoe").attr("disabled",true)
+        var $vals=$("#addOrEditBook input");
+        $vals.each(function(){
+            $(this).attr("style","").val("")
+        });
+    }
+
+
+</script>
+<script src="../static/layui.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    console.log([[${msg}]])
+    console.log([[${a}]])
+
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        var aa = [[${a}]]
+        if (aa != null) {
+            if([[${a}]]){
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }else {
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }
+
+
+        }
+        //触发事件
+
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+
+        //多窗口模式 - esc 键
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 27) {
+                layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+            }
+        });
+    })
+</script>
+<script type="text/javascript" th:inline="javascript">
+
+    var websocket = null;
+    var send_message=document.getElementById("neir");
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        var name = [[${name}]];
+        var role = [[${role}]];
+
+        var ans=innerHTML;
+
+
+        var oLi=document.createElement("div");
+        oLi.setAttribute("class","chat_right");
+        oLi.innerHTML=ans;
+        send_message.append(oLi);
+        message.value="";
+    }
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+    //发送消息
+    function send() {
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+</script>
+
+
+
+
+</html>

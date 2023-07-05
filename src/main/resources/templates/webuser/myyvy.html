@@ -1,0 +1,476 @@
+
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>中医医馆官网</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/css/assets/img/favicon.ico">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="../static/css/assets/css/bootstrap-5.0.5-alpha.min.css">
+    <link rel="stylesheet" href="../static/css/assets/css/LineIcons.2.0.css">
+    <link rel="stylesheet" href="../static/css/assets/css/glightbox.min.css">
+    <link rel="stylesheet" href="../static/css/assets/css/date.css">
+    <link rel="stylesheet" href="../static/css/assets/css/selectr.min.css">
+    <link rel="stylesheet" href="../static/css/web1.css">
+    <link rel="stylesheet" href="../static/css/assets/css/tiny-slider.css">
+    <link rel="stylesheet" href="../static/css/assets/css/main.css">
+    <link rel="stylesheet" href="../static/css/pagination.css">
+    <link rel="stylesheet" href="../../static/css/chatbox.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/layui.css">
+
+    <script src="../static/layui.js"></script>
+</head>
+
+<body>
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- ========================= preloader start ========================= -->
+<div class="preloader">
+    <div class="loader">
+        <div class="ytp-spinner">
+            <div class="ytp-spinner-container">
+                <div class="ytp-spinner-rotator">
+                    <div class="ytp-spinner-left">
+                        <div class="ytp-spinner-circle"></div>
+                    </div>
+                    <div class="ytp-spinner-right">
+                        <div class="ytp-spinner-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- preloader end -->
+
+<!-- ========================= header start ========================= -->
+<header id="home" class="header">
+
+    <div class="header-wrapper">
+        <div class="header-top theme-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="header-top-left text-center text-md-left">
+                            <ul>
+                                <li><a href="#"><i class="lni lni-phone"></i> +463281626556</a></li>
+                                <li><a href="#"><i class="lni lni-envelope"></i> hellomedic@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="header-top-right d-none d-md-block">
+                            <ul>
+                                <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="webmain.html">
+                                <img src="../static/css/assets/img/logo/logo.svg" alt="Logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a  href="/index">主页</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#about">关于我们</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#services">医疗服务</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#team">医师</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#blog">最新动态</a>
+                                    </li>
+
+                                </ul>
+                                <ul class="layui-nav  layui-hide layui-show-md-inline-block   "
+                                    style="background-color: white;margin-top: 10px;">
+                                    <li class="layui-nav-item layui-hide layui-show-md-inline-block nav-item">
+                                        <a href="javascript:;" >
+                                            <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                                            <!--/*@thymesVar id="name" type=""*/-->
+                                            <span  style="color:#333333">用户</span>
+                                        </a>
+                                        <dl class="layui-nav-child">
+                                            <dd><a   href="#">个人信息</a></dd>
+                                            <dd><a   href="/user_yvy">我的预约</a></dd>
+                                            <dd><a   href="/user_chuf">我的处方</a></dd>
+                                            <!--                    <dd><a href="">Settings</a></dd>-->
+                                            <dd><a href="/userlogin">退出</a></dd>
+                                        </dl>
+                                    </li>
+
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- navbar area -->
+    </div>
+
+    <div class="slider-wrapper">
+        <!-- ========================= slider-section start ========================= -->
+        <section class="slider-section">
+            <div class="slider-active slick-style">
+                <div class="single-slider img-bg" style="background-image:url('../static/css/assets/img/slider/slider-1.jpg');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-7 col-lg-8 col-md-10">
+                                <div class="slider-content">
+                                    <h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">我们为您的健康提供什么
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">中医医馆可以提供针对不同疾病的中药治疗方案。
+                                        中药是一种非常古老而有效的治疗方式，可以帮助身体恢复平衡和功能。
+                                        其次，中医医馆还会根据您的体质和健康情况为您制定饮食和生活习惯建议。这些建议可以帮助您改善身体状况，预防疾病，并增强免疫力。</p>
+                                    <a href="#about" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
+                                       data-delay=".9s">了解更多</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-slider img-bg" style="background-image:url('../static/css/assets/img/slider/slider-2.jpg');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-7 col-lg-8 col-md-10">
+                                <div class="slider-content">
+                                    <h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">专业医师和优质诊疗服务
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">中医医师都是专业的中医临床医生，经过正规的中医教育培训，并获得国家认证。
+                                        他们有着广泛的中医治疗经验和知识，能够对不同的疾病和症状进行准确的诊断和治疗。
+                                        如果您需要更具体的信息，建议您直接联系您所在地区的中医医馆咨询</p>
+                                    <a href="#contact" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
+                                       data-delay=".9s">了解更多</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-slider img-bg" style="background-image:url('../static/css/assets/img/slider/slider-3.jpg');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-7 col-lg-8 col-md-10">
+                                <div class="slider-content">
+                                    <h1 data-animation="fadeInDown" data-duration="1.5s" data-delay=".5s">我们的医疗服务
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-duration="1.5s" data-delay=".7s">现医管下设中医内科、肿瘤科、保健科、骨伤科、妇科、儿科等多个科室，
+                                        医院地理位置优越，位于广州市中心，交通便利，医院环境干净整洁，服务优质，设备精良。
+                                        始终坚持以发展为主题， 不断加强医德医风建设，持续提高医疗服务水平，倾心打造一个中医先进诊疗中心。</p>
+                                    <a href="#services" class="btn theme-btn page-scroll" data-animation="fadeInUp" data-duration="1.5s"
+                                       data-delay=".9s">我们的服务</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ========================= slider-section end ========================= -->
+    </div>
+</header>
+<!-- ========================= header end ========================= -->
+<section id=team class="team-section pt-150 pb-150">
+<div class="table-box" >
+    <!-- 数据表格 -->
+
+    <table id="dataList"  class="table table-bordered table-striped table-hover dataTable text-center" >
+        <thead>
+        <tr>
+            <th class="sorting">预约编号</th>
+            <th class="sorting">用户编号</th>
+            <th class="sorting">用户姓名</th>
+            <th class="sorting">医师编号</th>
+            <th class="sorting">医师姓名</th>
+            <th class="sorting">预约科室</th>
+            <th class="sorting">预约时间</th>
+            <th class="sorting">状态</th>
+            <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody th:each="user : ${user}" id="ta1">
+
+        <!--/*@thymesVar id="user" type=""*/-->
+        <tr id="qwe">
+
+            <td  th:text="${user.yvyid}"> 1</td>
+            <td th:text="${user.userid}">1</td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.docid}" style="width: 10%"></td>
+            <td th:text="${user.docname}">1</td>
+            <td >
+                <p th:if="${user.subject}==1">内科</p>
+                <p th:if="${user.subject}==2">肿瘤科</p>
+                <p th:if="${user.subject}==3">保健科</p>
+                <p th:if="${user.subject}==4">骨伤科</p>
+                <p th:if="${user.subject}==5">妇科</p>
+                <p th:if="${user.subject}==6">儿科</p>
+            </td>
+            <td th:text="${user.time}"></td>
+            <td>
+
+                <p th:if="${user.status}==1">已预约</p>
+                <p th:if="${user.status}==2">诊疗中</p>
+                <p th:if="${user.status}==3">诊疗结束</p>
+            </td>
+
+            <td class="text-center" style="width: 14%">
+
+                <button  th:if="${user.status}==1" type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                         data-target="#borrowModal" onclick="zliao()"> 诊疗
+                </button>
+                <button  th:if="${user.status}!=1" type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                         data-target="#borrowModal" onclick="zliao()" disabled="true"> 诊疗
+                </button>
+
+<!--                <button  type="button" class="btn bg-olive btn-xs" data-toggle="modal"-->
+<!--                         data-target="#addOrEditModal"  th:onclick="box3([[${user.yvyid}]],[[${user.userid}]],[[${user.username}]],-->
+<!--                       [[${user.docid}]] ,[[${user.docname}]],[[${user.subject}]],[[${user.time}]],[[${user.status}]])"> 编辑-->
+<!--                </button>-->
+<!--                <button th:if="${user.status}==3" type="button" class="btn bg-olive btn-xs" th:onclick="del([[${user.yvyid}]])">删除</button>-->
+<!--                <button th:if="${user.status}!=3" type="button" class="btn bg-olive btn-xs" disabled="true">删除</button>-->
+
+
+
+            </td>
+        </tr>
+
+        </tbody>
+        <div id="demo2"></div>
+        <ul id="biuuu_city_list"></ul>
+    </table>
+</div>
+
+
+</section>
+
+
+<!-- ========================= 登录 ========================= -->
+
+<!-- ========================= contact-section end ========================= -->
+
+<!-- ========================= 底部栏 ========================= -->
+<footer class="footer pt-100 img-bg" style="background-image:url('../static/css/assets/img/bg/footer-bg.jpg');">
+    <div class="container">
+        <div class="footer-widget-wrapper">
+            <div class="row">
+                <div class="col-xl-4 col-lg-5 col-md-6">
+                    <div class="footer-widget mb-30">
+                        <a href="webmain.html" class="logo"><img src="../static/css/assets/img/logo/logo.svg" alt=""></a>
+                        <p>Lorem ipsum dolor serit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                            labore dolore magna
+                            aliquyam erat diam voluptua.</p>
+                        <div class="footer-social-links">
+                            <ul>
+                                <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                <li><a href="#"><i class="lni lni-instagram-original"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-6">
+                    <div class="footer-widget mb-30">
+                        <h4>Quick Link</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Doctor</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-5">
+                    <div class="footer-widget mb-30">
+                        <h4>Quick Link</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Cardiology</a></li>
+                            <li><a href="#">Neurology</a></li>
+                            <li><a href="#">Gastroenterology</a></li>
+                            <li><a href="#">Routine Checkup</a></li>
+                            <li><a href="#">Orthopedics</a></li>
+                            <li><a href="#">Dental Surgery</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-12 col-md-7">
+                    <div class="footer-widget mb-30">
+                        <h4>Medical Location</h4>
+                        <div class="map-canvas">
+                            <iframe class="map" id="gmap_canvas"
+                                    src="https://www.amap.com/" sandbox=""></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <p class="mb-0 text-center"><a target="_blank" href="http://www.mobanwang.com/" title="网页模板">网页模板</a></p>
+        </div>
+    </div>
+</footer>
+<!-- ========================= footer end ========================= -->
+
+
+<!-- ========================= scroll-top ========================= -->
+<a href="#" class="scroll-top">
+    <i class="lni lni-arrow-up"></i>
+</a>
+<a  class="scroll-top" style="margin-bottom: 60px" onclick="zliao()">
+    <i class="lni lni-envelope"></i>
+</a>
+
+<!--诊疗界面-->
+<div  class="modal" id="zl">
+
+    <div style="margin-top: 100px">
+        <div class="chat_commento " >
+            <div modal-dialog>
+                <!-- top -->
+                <div style="display: flex;">
+                    <div class="chat_top" style="display: flex;width: 45%">
+                        中医医馆在线诊疗
+                    </div>
+                    <div onclick="box1()" class="" style="display: flex;width: 20%">关闭</div>
+
+                </div><!-- line -->
+                <div class="line"></div>
+                <!-- middle -->
+                <div class="chat_middle" id="chat_middle_item" >
+                    <!-- 左边 -->
+
+                    <!--右边 -->
+
+                    <div id="neir"></div>
+                    <!-- l_2 -->
+                    <div class=" clearfix">
+
+                    </div>
+                    <!-- line -->
+                    <div class="line"></div></div>
+                <!-- foot --><div>
+                <div class="chat_foot">
+                    <!-- context -->
+                    <input id="text" class="chat_context"  cols="30" rows="10" placeholder="请输入"></input>
+                    <div class="chat_commit" id="button" onclick="send()">发送</div>
+                    <button class="chat_commit" onclick="send()">发送消息</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========================= JS here ========================= -->
+
+
+</body>
+<script src="../static/css/assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
+<script src="../static/css/assets/js/wow.min.js"></script>
+<script src="../static/css/assets/js/tiny-slider.js"></script>
+<script src="../static/css/assets/js/glightbox.min.js"></script>
+<script src="../static/css/assets/js/selectr.min.js"></script>
+<script src="../static/css/assets/js/date.js"></script>
+<script src="../static/css/assets/js/contact-form.js"></script>
+<script src="../static/layui.js"></script>
+<script src="../static/css/assets/js/main.js"></script>
+<script  type="text/javascript" th:inline="javascript">
+    function yvy(subject) {
+        console.log(subject)
+        //window.location.href='/del?account='+account+'&role='+role;
+        window.location.href='/yvyve?subject='+subject;
+    }
+    var websocket = null;
+    function zliao() {
+        document.getElementById("zl").style.display="block";
+        //判断当前浏览器是否支持WebSocket
+        if ('WebSocket'in window) {
+            var nickname = 3;
+
+            websocket = new WebSocket("ws://localhost:8080/websocket/"+nickname);
+        } else {
+            alert('Not support websocket')
+        }
+        //连接发生错误的回调方法
+        websocket.onerror = function() {
+            setMessageInnerHTML("error");
+        };
+        //连接成功建立的回调方法
+        websocket.onopen = function(event) {
+            setMessageInnerHTML("医师已进入诊疗界面");
+        }
+        //接收到消息的回调方法
+        websocket.onmessage = function(event) {
+            setMessageInnerHTML(event.data);
+        }
+        //连接关闭的回调方法
+        websocket.onclose = function() {
+            setMessageInnerHTML("医师已离开诊疗界面");
+        }
+        //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+        window.onbeforeunload = function() {
+            websocket.close();
+        }
+    }
+    function box1(){
+        websocket.close();
+        document.getElementById("zl").style.display="none";
+
+    };
+</script>
+<script type="text/javascript" th:inline="javascript">
+
+    var websocket = null;
+    var send_message=document.getElementById("neir");
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        var ans=innerHTML;
+        var oLi=document.createElement("div");
+        oLi.setAttribute("class","chat_right");
+        oLi.innerHTML=ans;
+        send_message.append(oLi);
+        message.value="";
+    }
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+    //发送消息
+    function send() {
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+</script>
+</html>

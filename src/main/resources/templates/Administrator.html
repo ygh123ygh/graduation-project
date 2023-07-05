@@ -1,0 +1,277 @@
+<!--<!DOCTYPE html >-->
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/layui.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/css/pagination.css">
+</head>
+<body style=" position: fixed;left: 205px ; width: 85%;height: 100%;">
+<div class="box-header with-border">
+    <h3 class="box-title">管理员列表</h3>
+    <!--/*@thymesVar id="user" type=""*/-->
+
+</div>
+
+<div class="box-body">
+
+    <th:if test="${USER_SESSION.role =='ADMIN'}">
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
+                            data-target="#addOrEditModal" onclick="box()"> 新增
+                    </button>
+                </div>
+            </div>
+        </div>&nbsp&nbsp&nbsp&nbsp
+    </th:if>
+
+    <!--工具栏 数据搜索<h1 th:text="${user}"/> -->
+    <div class="box-tools pull-right">
+        <div class="has-feedback">
+            <form action="/sel" method="post">
+                用户名称：<input name="name" >&nbsp&nbsp&nbsp&nbsp
+                用户账号：<input name="author" >&nbsp&nbsp&nbsp&nbsp
+
+                <input class="btn btn-default" type="submit" value="查询">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="table-box" >
+    <!-- 数据表格 -->
+    <table id="dataList" class="table table-bordered table-striped table-hover dataTable text-center" >
+        <thead>
+        <tr>
+
+            <th class="sorting">姓名</th>
+            <th class="sorting">账号</th>
+            <th class="sorting">密码</th>
+            <th class="sorting">任职状态</th>
+            <th class="sorting">职位</th>
+<!--            <th class="sorting">借阅时间</th>-->
+            <th class="sorting">注册时间</th>
+            <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody th:each="user : ${user}" id="ta1">
+
+            <!--/*@thymesVar id="user" type=""*/-->
+            <tr id="qwe">
+
+                <td  th:text="${user.name}">
+                <input id="name22"/>
+                </td>
+
+                <td th:text="${user.account}"></td>
+                <td th:text="${user.password}"></td>
+                <td>
+                    <p th:if="${user.status}==1">在职</p>
+                    <p th:if="${user.status}==0">离职</p>
+                </td>
+                <td>
+                    <p th:if="${user.role}==1">管理员</p>
+                    <p th:if="${user.role}==2">医师</p>
+                </td>
+
+                <td th:text="${user.time}"></td>
+                <td class="text-center">
+
+
+
+                            <button th:if="${role }==1" type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                                    data-target="#addOrEditModal"  th:onclick="box3([[${user.account}]],[[${user.password}]],[[${user.name}]],[[${user.role}]],[[${user.status}]],[[${user.time}]])"> 编辑
+                            </button>
+                    <button th:if="${role }!=1" type="button" class="btn bg-olive btn-xs" data-toggle="modal" disabled="true"
+                            data-target="#addOrEditModal"  th:onclick="box3([[${user.account}]],[[${user.password}]],[[${user.name}]],[[${user.role}]],[[${user.status}]],[[${user.time}]])"> 编辑
+                    </button>
+
+
+               
+                        <button th:if="${role }==1" type="button" class="btn bg-olive btn-xs" th:onclick="del([[${user.account}]],[[${user.role}]])">删除</button>
+                        <button th:if="${role }!=1" type="button" class="btn bg-olive btn-xs" disabled="true">删除</button>
+                </td>
+            </tr>
+
+        </tbody>
+        <div id="demo2"></div>
+        <ul id="biuuu_city_list"></ul>
+    </table>
+
+
+
+
+</div>
+
+
+<!-- 添加和编辑图书的模态窗口 -->
+<div class="modal " id="add" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="myModalLabel">管理员信息</h3>
+            </div>
+            <div class="modal-body">
+                <form id="add" action="/addmain" method="post">
+
+                    <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                        <tr>
+
+                            <td>账号</td>
+                            <td><input class="form-control" placeholder="账号" name="account" id="account"></td>
+                            <td>密码</td>
+                            <td><input class="form-control" placeholder="密码" name="password" id="password"></td>
+                        </tr>
+                        <tr>
+                            <td>姓名</td>
+                            <td><input class="form-control" placeholder="姓名" name="name" id="name"  >
+
+                            </td>
+
+                            <!-- <td>作者</td>
+                             <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                            <td>职位</td>
+                            <td>
+                                <select class="form-control" id="role" name="role" >
+                                    <option value="1">管理员</option>
+                                    <option value="2">医师</option>
+                                </select>
+                            </td>
+                         </tr>
+
+                         <tr>
+                             <td>任职状态</td>
+                             <td>
+                                 <select class="form-control" id="status" name="status" >
+                                     <option value="1">在职</option>
+                                     <option value="0">代职</option>
+                                 </select>
+                             </td>
+
+                             <td>任职时间</td>
+                             <td>
+
+
+                                     <input class="layui-input form-control" id="test1" type="date" placeholder="yyyy-MM-dd" name="time">
+
+                             </td>
+                         </tr>
+
+
+                     </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success"  onclick="box1()" type="submit" name="sign">保存
+                        </button>
+                        <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                    </div>
+                 </form>
+             </div>
+
+         </div>
+     </div>
+ </div>
+
+<!--编辑框-->
+<div th:include="box.html::edit_login "   ></div>
+</body>
+ <script type="text/javascript" th:inline="javascript">
+
+
+
+
+     function resetFrom() {
+         $("#aoe").attr("disabled",true)
+         var $vals=$("#addOrEditBook input");
+         $vals.each(function(){
+             $(this).attr("style","").val("")
+         });
+     }
+     function box(){
+         document.getElementById("add").style.display="block";
+     };
+     function box1(){
+
+         document.getElementById("add").style.display="none";
+         document.getElementById("edit_login").style.display="none";
+
+     };
+     function box3(account,password,name,role,status,time){
+
+         console.log(account,password,name,role,status,time);
+         document.getElementById("account1").value=account;
+         document.getElementById("password1").value=password;
+         document.getElementById("name1").value=name;
+         document.getElementById("role1").value=role;
+         document.getElementById("status1").value=status;
+         document.getElementById("time1").value=time;
+         document.getElementById("edit_login").style.display="block";
+
+
+
+     };
+     function del(account,role){
+         var name = [[${name}]];
+         console.log(account);
+
+         window.location.href='/del?account='+account+'&role='+role;
+
+
+     };
+     function edit() {
+         document.getElementById("box").action='/update';
+     }
+
+ </script>
+<script src="../static/layui.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    console.log([[${msg}]])
+    console.log([[${a}]])
+
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+var aa = [[${a}]]
+        if (aa != null) {
+if([[${a}]]){
+    layer.msg('[[${msg}]]', {
+        time: 2000, //20s后自动关闭
+        //btn: ['明白了', '知道了', '哦']
+    });
+}else {
+    layer.msg('[[${msg}]]', {
+        time: 2000, //20s后自动关闭
+        //btn: ['明白了', '知道了', '哦']
+    });
+}
+
+
+        }
+        //触发事件
+
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+
+        //多窗口模式 - esc 键
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 27) {
+                layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+            }
+        });
+    })
+</script>
+
+
+
+
+
+ </html>

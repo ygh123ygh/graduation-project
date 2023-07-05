@@ -1,0 +1,477 @@
+<!--<!DOCTYPE html >-->
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/layui.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/css/pagination.css">
+</head>
+<body style=" position: fixed;left: 205px">
+<div th:fragment="edit_login">
+<div  class="modal" id="edit_login">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="myModalLabel">管理员信息</h3>
+            </div>
+            <div class="modal-body">
+                <form id="box" action="/addmain" method="post">
+
+                    <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                        <tr>
+
+                            <td>账号</td>
+                            <td><input class="form-control" placeholder="账号" name="account" id="account1"></td>
+                            <td>密码</td>
+                            <td><input class="form-control" placeholder="密码" name="password" id="password1"></td>
+                        </tr>
+                        <tr>
+                            <td>姓名</td>
+                            <td><input class="form-control" placeholder="姓名" name="name" id="name1" value="[[${name}]]" >
+
+                            </td>
+
+                            <!-- <td>作者</td>
+                             <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                            <td>职位</td>
+                            <td>
+                                <select class="form-control" id="role1" name="role" >
+                                    <option value="1">管理员</option>
+                                    <option value="2">医师</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>任职状态</td>
+                            <td>
+                                <select class="form-control" id="status1" name="status" >
+                                    <option value="1">在职</option>
+                                    <option value="0">代职</option>
+                                </select>
+                            </td>
+                            <td>任职时间</td>
+                            <td>
+
+
+                                <input class="layui-input form-control" id="time1" type="text" placeholder="yyyy-MM-dd" name="time">
+
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success"  onclick="edit()" type="submit" name="sign">保存
+                        </button>
+                        <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div th:fragment="edit_doc">
+    <div  class="modal" id="doctor_eidt">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">医师信息编辑</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="doc_eidt" action="/docup" method="post">
+
+                        <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                            <tr>
+
+                                <td>姓名</td>
+                                <td><input class="form-control" placeholder="姓名" name="name" id="name11"></td>
+                                <td>编号</td>
+                                <td><input class="form-control" placeholder="编号" name="account" id="account11"></td>
+                            </tr>
+                            <tr>
+                                <td>年龄</td>
+                                <td><input class="form-control" placeholder="年龄" name="age" id="age11" value="[[${name}]]" >
+
+                                </td>
+                                <td>性别</td>
+                                <td><input class="form-control" placeholder="性别" name="sex" id="sex11" value="[[${name}]]" >
+                            </tr>
+                            <tr>
+                                </td>
+                                <td>邮箱</td>
+                                <td><input class="form-control" placeholder="邮箱" name="email" id="email11" value="[[${name}]]" >
+
+                                </td>
+
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                                <td>职位</td>
+                                <td>
+                                    <select class="form-control" id="duty11" name="duty" >
+                                        <option value="主治中医师">主治中医师</option>
+                                        <option value="副主任中医师">副主任中医师</option>
+                                        <option value="主任中医师">主任中医师</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>职位</td>
+                                <td>
+                                    <select class="form-control" id="subject11" name="subject" >
+                                        <option value="1">内科</option>
+                                        <option value="2">肿瘤科</option>
+                                        <option value="3">保健科</option>
+                                        <option value="4">骨伤科</option>
+                                        <option value="5">妇科科</option>
+                                        <option value="6">儿科</option>
+
+                                    </select>
+                                </td>
+                                <td>状态</td>
+                                <td>
+                                    <select class="form-control" id="status11" name="status" >
+                                        <option value="1">就诊</option>
+                                        <option value="2">已预约</option>
+                                        <option value="3">诊疗中</option>
+                                        <option value="4">暂离</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                        <div class="modal-footer">
+                            <button class="btn btn-success"  onclick="edit_doc()" type="submit" name="sign">保存
+                            </button>
+                            <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="eitd_user">
+    <div  class="modal" id="user_eidt">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">用户信息编辑</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="doc_eidt" action="/userup" method="post">
+
+                        <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                            <tr>
+
+                                <td>用户编号</td>
+                                <td><input class="form-control" placeholder="姓名" name="id" id="user_id"></td>
+                                <td>用户姓名</td>
+                                <td><input class="form-control" placeholder="编号" name="name" id="users_name"></td>
+                            </tr>
+                            <tr>
+                                <td>年龄</td>
+                                <td><input class="form-control" placeholder="年龄" name="age" id="users_age"  >
+
+                                </td>
+                                <td>性别</td>
+                                <td><input class="form-control" placeholder="性别" name="sex" id="users_sex"  >
+                            </tr>
+                            <tr>
+                                </td>
+                                <td>联系方式</td>
+                                <td><input class="form-control" placeholder="电话" name="phone" id="users_phone"  >
+
+                                </td>
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                                <td>居住地</td>
+                                <td>
+                                    <select class="form-control" id="user_live" name="live" >
+                                        <option value="北京">北京</option>
+                                        <option value="厦门">厦门</option>
+                                        <option value="福州">福州</option>
+                                        <option value="广州">广州</option>
+                                        <option value="成都">成都</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>出生日期</td>
+                                <td><input class="form-control" placeholder="出生日期" name="born" id="users_born"  >
+
+                                </td>
+                                <td>状态</td>
+                                <td>
+                                    <select class="form-control" id="user_status" name="status" >
+                                        <option value="1">在线</option>
+                                        <option value="2">已预约</option>
+                                        <option value="3">诊疗中</option>
+                                        <option value="4">暂离</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                        <div class="modal-footer">
+                            <button class="btn btn-success"  onclick="user_eidt()" type="submit" name="sign">保存
+                            </button>
+                            <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="eitd_med">
+<div class="modal " id="edit_med" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="myModalLabel">药品信息</h3>
+            </div>
+            <div class="modal-body">
+                <form id="add" action="/medup" method="post">
+
+                    <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                        <tr>
+
+                            <td>药品编号</td>
+                            <td><input class="form-control" placeholder="药品编号" name="id" id="id3"></td>
+                            <td>药品名称</td>
+                            <td><input class="form-control" placeholder="药品名称" name="name" id="name3"></td>
+                        </tr>
+                        <tr>
+                            <td>药品性味</td>
+                            <td><input class="form-control" placeholder="药品性味" name="taste" id="taste3"  >
+
+                            </td>
+                            <td>药品用量</td>
+                            <td><input class="form-control" placeholder="药品用量" name="effect" id="effect3"  >
+
+                            </td>
+
+                            <!-- <td>作者</td>
+                             <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+
+                        </tr>
+                        <tr>
+
+                            <td>药品作用</td>
+                            <td><input class="form-control" placeholder="药品作用" name="dosage" id="dosage3"  >
+
+                            </td>
+                            <td>药品禁忌</td>
+                            <td><input class="form-control" placeholder="药品禁忌" name="taboo" id="taboo3"  >
+
+                            </td>
+                        </tr>
+
+
+                    </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success"  onclick="box1()" type="submit" name="sign">保存
+                        </button>
+                        <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<div th:fragment="add_yvy">
+    <div class="modal " id="add_yvy" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">药品信息</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="add" action="/yvyve_add" method="post">
+
+                        <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                            <tr>
+
+
+                                <td>预约编号</td>
+                                <td><input class="form-control" placeholder="编号" name="yvyid" id="yvyid"></td>
+                                <td>状态</td>
+                                <td><input class="form-control" placeholder="编号" name="status" id="status"></td>
+                            </tr>
+                            <tr>
+
+                                <td>预约时间</td>
+                                <td>
+                                    <input class="layui-input form-control" id="time" type="date" placeholder="yyyy-MM-dd" name="time">
+                                </td>
+                                <td>用户编号</td>
+                                <td><input class="form-control" placeholder="用户编号" name="userid" id="userid"></td>
+                            </tr>
+                            <tr>
+                                <td>用户姓名</td>
+                                <td><input class="form-control" placeholder="用户姓名" name="username" id="username"  >
+
+                                </td>
+                                <td>医师编号</td>
+                                <td><input class="form-control" placeholder="医师编号" name="docid" id="docid"  >
+
+                                </td>
+
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+
+                            </tr>
+                            <tr>
+
+                                <td>医师姓名</td>
+                                <td><input class="form-control" placeholder="医师姓名" name="docname" id="docname"  >
+
+                                </td>
+                                <td>科室</td>
+                                <td>
+                                    <select class="form-control" id="subject" name="subject" >
+                                        <option value="1">内科</option>
+                                        <option value="2">肿瘤科</option>
+                                        <option value="3">保健科</option>
+                                        <option value="4">骨伤科</option>
+                                        <option value="5">妇科科</option>
+                                        <option value="6">儿科</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                        <div class="modal-footer">
+                            <button class="btn btn-success"  onclick="box1()" type="submit" name="sign">保存
+                            </button>
+                            <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="eitd_yvy">
+    <div class="modal " id="eitd_yvy" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">预约信息</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="add" action="/yvyve_eitd" method="post">
+                        <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+                            <tr>
+                                <td>预约编号</td>
+                                <td><input class="form-control" placeholder="编号" name="yvyid" id="yvyid"></td>
+                                <td>状态</td>
+                                <td>
+                                    <select class="form-control" id="status" name="status" >
+                                        <option value="1">已预约</option>
+                                        <option value="2">诊疗中</option>
+                                        <option value="3">已结束</option>
+                                    </select></td>
+                            </tr>
+                            <tr>
+                                <td>预约时间</td>
+                                <td>
+                                    <input class="layui-input form-control" id="time" type="date" placeholder="yyyy-MM-dd" name="time">
+                                </td>
+                                <td>用户编号</td>
+                                <td><input class="form-control" placeholder="用户编号" name="userid" id="userid"></td>
+                            </tr>
+                            <tr>
+                                <td>用户姓名</td>
+                                <td><input class="form-control" placeholder="用户姓名" name="username" id="username"  >
+                                </td>
+                                <td>医师编号</td>
+                                <td><input class="form-control" placeholder="医师编号" name="docid" id="docid"  >
+                                </td>
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                            </tr>
+                            <tr>
+                                <td>医师姓名</td>
+                                <td><input class="form-control" placeholder="医师姓名" name="docname" id="docname"  >
+                                </td>
+                                <td>科室</td>
+                                <td>
+                                    <select class="form-control" id="subject" name="subject" >
+                                        <option value="1">内科</option>
+                                        <option value="2">肿瘤科</option>
+                                        <option value="3">保健科</option>
+                                        <option value="4">骨伤科</option>
+                                        <option value="5">妇科科</option>
+                                        <option value="6">儿科</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="modal-footer">
+                            <button class="btn btn-success"  onclick="box1()" type="submit" name="sign">保存
+                            </button>
+                            <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑框
+<div th:include="box.html "  class="modal" id="edit" th:each="msg : ${msg}"></div>-->
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+
+
+
+
+    function resetFrom() {
+        $("#aoe").attr("disabled",true)
+        var $vals=$("#addOrEditBook input");
+        $vals.each(function(){
+            $(this).attr("style","").val("")
+        });
+    }
+
+
+
+</script>
+<script src="../static/layui.js"></script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#test1'
+            ,type: 'datetime'
+        });
+    });
+</script>
+</html>

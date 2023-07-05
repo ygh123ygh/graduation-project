@@ -1,0 +1,428 @@
+<!--<!DOCTYPE html >-->
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/layui.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/css/pagination.css">
+    <link rel="stylesheet" href="../../static/css/chatbox.css">
+
+</head>
+<body style=" position: fixed;left: 205px ; width: 85%;height: 100%;">
+<div class="box-header with-border">
+    <h3 class="box-title">处方详情列表</h3>
+    <!--/*@thymesVar id="user" type=""*/-->
+
+</div>
+
+<div class="box-body">
+
+    <th:if test="${USER_SESSION.role =='ADMIN'}">
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
+                            data-target="#addOrEditModal" onclick="box()"> 新增
+                    </button>
+                </div>
+            </div>
+        </div>&nbsp&nbsp&nbsp&nbsp
+    </th:if>
+
+    <!--工具栏 数据搜索<h1 th:text="${user}"/> -->
+    <div class="box-tools pull-right">
+        <div class="has-feedback">
+            <form action="/sel" method="post">
+                用户名称：<input name="name" >&nbsp&nbsp&nbsp&nbsp
+                用户账号：<input name="author" >&nbsp&nbsp&nbsp&nbsp
+
+                <input class="btn btn-default" type="submit" value="查询">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="table-box" >
+    <!-- 数据表格 -->
+    <div th:if="${role}==1" style="text-align:center;font-weight: 500;font-size: 50px; ">管理员禁止查看患者用户信息!</div>
+    <table id="dataList" th:if="${role}==2" class="table table-bordered table-striped table-hover dataTable text-center" >
+        <thead>
+        <tr>
+            <th class="sorting">处方编号</th>
+            <th class="sorting">诊断</th>
+            <th class="sorting">医师姓名</th>
+            <th class="sorting">患者姓名</th>
+            <th class="sorting">患者性别</th>
+            <th class="sorting">科患者性别</th>
+            <th class="sorting">科室</th>
+            <th class="sorting">时间</th>
+            <th class="sorting">状态</th>
+            <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody th:each="user : ${user}" id="ta1">
+
+        <!--/*@thymesVar id="user" type=""*/-->
+        <tr id="qwe">
+
+            <td  th:text="${user.cfid}"> </td>
+            <td th:text="${user.zduan}"></td>
+            <td th:text="${user.docname}"></td>
+            <td th:text="${user.username}" style="width: 10%"></td>
+            <td th:text="${user.userage}"></td>
+            <td th:text="${user.usersex}"></td>
+            <td >
+                <p th:if="${user.subject}==1">内科</p>
+                <p th:if="${user.subject}==2">肿瘤科</p>
+                <p th:if="${user.subject}==3">保健科</p>
+                <p th:if="${user.subject}==4">骨伤科</p>
+                <p th:if="${user.subject}==5">妇科科</p>
+                <p th:if="${user.subject}==6">儿科科</p>
+            </td>
+            <td th:text="${user.time}"></td>
+            <td>
+                <p th:if="${user.status}==1">已支付</p>
+                <p th:if="${user.status}==2">未支付</p>
+                <p th:if="${user.status}==3">已完成未支付</p>
+                <p th:if="${user.status}==4">暂离 </p>
+            </td>
+
+            <td class="text-center" style="width: 14%">
+
+                <button   type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                        data-target="#borrowModal" th:onclick="cha([[${user.cfid}]],[[${user.userid}]],[[${user.username}]],
+                       [[${user.docid}]] ,[[${user.docname}]],[[${user.subject}]],[[${user.time}]],[[${user.status}]]
+                       ,[[${user.userage}]],[[${user.usersex}]],[[${user.ziliao}]],[[${user.chuf}]],[[${user.zduan}]])"> 查看详情
+                </button>
+
+
+                <button  type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                        data-target="#addOrEditModal"  th:onclick="box3([[${user.cfid}]],[[${user.userid}]],[[${user.username}]],
+                       [[${user.docid}]] ,[[${user.docname}]],[[${user.subject}]],[[${user.time}]],[[${user.status}]]
+                       ,[[${user.userage}]],[[${user.usersex}]],[[${user.ziliao}]],[[${user.chuf}]],[[${user.zduan}]])"> 编辑
+                </button>
+
+
+
+            </td>
+        </tr>
+
+        </tbody>
+        <div id="demo2"></div>
+        <ul id="biuuu_city_list"></ul>
+    </table>
+</div>
+
+
+
+
+
+<!--编辑框-->
+<div  class="modal" id="kcf">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="myModalLabel">处方信息编辑</h3>
+            </div>
+            <div class="modal-body">
+                <form id="doc_eidt" action="/chuf_eitd" method="post">
+
+                    <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                        <tr>
+
+                            <td>处方编号</td>
+                            <td><input class="form-control" placeholder="姓名" name="cfid" id="cfid"></td>
+                            <td>诊断</td>
+                            <td><input class="form-control" placeholder="编号" name="zduan" id="zduan"></td>
+                        </tr>
+                        <tr>
+                            <td>医师编号</td>
+                            <td><input class="form-control" placeholder="医师编号" name="docid" id="docid" value="" >
+
+                            </td>
+                            <td>医师姓名</td>
+                            <td><input class="form-control" placeholder="医师姓名" name="docname" id="docname" value="" > </td>
+                        </tr>
+                        <tr>
+
+                            <td>用户编号</td>
+                            <td><input class="form-control" placeholder="用户编号" name="userid" id="userid" value="" >
+
+                            </td>
+                            <td>用户姓名</td>
+                            <td><input class="form-control" placeholder="用户姓名" name="username" id="username" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>用户年龄</td>
+                            <td><input class="form-control" placeholder="用户年龄" name="userage" id="userage" value="" >
+
+                            </td>
+                            <td>用户性别</td>
+                            <td><input class="form-control" placeholder="用户性别" name="usersex" id="usersex" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>科室</td>
+                            <td>
+                                <select class="form-control" id="subject" name="subject" >
+                                    <option value="1">内科</option>
+                                    <option value="2">肿瘤科</option>
+                                    <option value="3">保健科</option>
+                                    <option value="4">骨伤科</option>
+                                    <option value="5">妇科科</option>
+                                    <option value="6">儿科</option>
+
+                                </select>
+                            </td>
+                            <td>治疗方案</td>
+                            <td><input class="form-control" placeholder="治疗方案" name="ziliao" id="ziliao" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>处方药品</td>
+                            <td><input class="form-control" placeholder="处方药品" name="chuf" id="chuf" value="" >
+                            </td>
+                            <td>时间</td>
+                            <td><input class="form-control" placeholder="时间" name="time" id="time" value="" type="date">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>状态</td>
+                            <td>
+                                <select class="form-control" id="status" name="status" >
+                                    <option value="1">已支付</option>
+                                    <option value="2">未支付</option>
+                                    <option value="3">暂离</option>
+
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success"   type="submit" name="sign">保存
+                        </button>
+                        <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div  class="modal" id="chakcf">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="myModalLabel">处方信息编辑</h3>
+            </div>
+            <div class="modal-body">
+                <form id="doc_eidt" action="" method="post">
+
+                    <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                        <tr>
+
+                            <td>处方编号</td>
+                            <td><input class="form-control" placeholder="姓名" name="cfid" id="cfid1"></td>
+                            <td>诊断</td>
+                            <td><input class="form-control" placeholder="编号" name="zduan" id="zduan1"></td>
+                        </tr>
+                        <tr>
+                            <td>医师编号</td>
+                            <td><input class="form-control" placeholder="医师编号" name="docid" id="docid1" value="" >
+
+                            </td>
+                            <td>医师姓名</td>
+                            <td><input class="form-control" placeholder="医师姓名" name="docname" id="docname1" value="" > </td>
+                        </tr>
+                        <tr>
+
+                            <td>用户编号</td>
+                            <td><input class="form-control" placeholder="用户编号" name="userid" id="userid1" value="" >
+
+                            </td>
+                            <td>用户姓名</td>
+                            <td><input class="form-control" placeholder="用户姓名" name="username" id="username1" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>用户年龄</td>
+                            <td><input class="form-control" placeholder="用户年龄" name="userage" id="userage1" value="" >
+
+                            </td>
+                            <td>用户性别</td>
+                            <td><input class="form-control" placeholder="用户性别" name="usersex" id="usersex1" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>科室</td>
+                            <td>
+                                <select class="form-control" id="subject1" name="subject" >
+                                    <option value="1">内科</option>
+                                    <option value="2">肿瘤科</option>
+                                    <option value="3">保健科</option>
+                                    <option value="4">骨伤科</option>
+                                    <option value="5">妇科科</option>
+                                    <option value="6">儿科</option>
+
+                                </select>
+                            </td>
+                            <td>治疗方案</td>
+                            <td><input class="form-control" placeholder="治疗方案" name="ziliao" id="ziliao1" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>处方药品</td>
+                            <td><input class="form-control" placeholder="处方药品" name="chuf" id="chuf1" value="" >
+                            </td>
+                            <td>时间</td>
+                            <td><input class="form-control" placeholder="时间" name="time" id="time1" value="" type="date">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>状态</td>
+                            <td>
+                                <select class="form-control" id="status2" name="status" >
+                                    <option value="1">已支付</option>
+                                    <option value="2">未支付</option>
+                                    <option value="3">暂离</option>
+
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="modal-footer">
+
+                        </button>
+                        <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script src="../static/layui.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    var websocket = null;
+
+
+    function box1(){
+
+        document.getElementById("kcf").style.display="none";
+        document.getElementById("chakcf").style.display="none";
+
+    };
+    function box3(cfid,userid,username,docid,docname,subject,time,status
+        ,userage,usersex,ziliao,chuf,zduan){
+        console.log(cfid,userid,username,docid,docname,subject,time,status
+            ,userage,usersex,ziliao,chuf,zduan);
+        document.getElementById("cfid").value=cfid;
+        document.getElementById("userid").value=userid;
+        document.getElementById("username").value=username;
+        document.getElementById("docid").value=docid;
+        document.getElementById("docname").value=docname;
+        document.getElementById("subject").value=subject;
+        document.getElementById("time").value=time;
+        document.getElementById("status").value=status;
+        document.getElementById("userage").value=userage;
+        document.getElementById("usersex").value=usersex;
+        document.getElementById("ziliao").value=ziliao;
+        document.getElementById("chuf").value=chuf;
+        document.getElementById("zduan").value=zduan;
+        document.getElementById("kcf").style.display="block";
+    };
+    function cha(cfid,userid,username,docid,docname,subject,time,status
+        ,userage,usersex,ziliao,chuf,zduan){
+        console.log(cfid,userid,username,docid,docname,subject,time,status
+            ,userage,usersex,ziliao,chuf,zduan);
+        document.getElementById("cfid1").value=cfid;
+        document.getElementById("userid1").value=userid;
+        document.getElementById("username1").value=username;
+        document.getElementById("docid1").value=docid;
+        document.getElementById("docname1").value=docname;
+        document.getElementById("subject1").value=subject;
+        document.getElementById("time1").value=time;
+        document.getElementById("status2").value=status;
+        document.getElementById("userage1").value=userage;
+        document.getElementById("usersex1").value=usersex;
+        document.getElementById("ziliao1").value=ziliao;
+        document.getElementById("chuf1").value=chuf;
+        document.getElementById("zduan1").value=zduan;
+        document.getElementById("chakcf").style.display="block";
+    };
+    function resetFrom() {
+        $("#aoe").attr("disabled",true)
+        var $vals=$("#addOrEditBook input");
+        $vals.each(function(){
+            $(this).attr("style","").val("")
+        });
+    }
+
+
+</script>
+<script src="../static/layui.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    console.log([[${msg}]])
+    console.log([[${a}]])
+
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        var aa = [[${a}]]
+        if (aa != null) {
+            if([[${a}]]){
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }else {
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }
+
+
+        }
+        //触发事件
+
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+
+        //多窗口模式 - esc 键
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 27) {
+                layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+            }
+        });
+    })
+</script>
+
+
+
+
+
+</html>

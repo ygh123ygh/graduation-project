@@ -1,0 +1,450 @@
+<!--<!DOCTYPE html >-->
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/layui.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" href="../static/css/pagination.css">
+    <link rel="stylesheet" href="../../static/css/chatbox.css">
+</head>
+<body style=" position: fixed;left: 205px ; width: 85%;height: 100%;">
+<div class="box-header with-border">
+    <h3 class="box-title">预约信息列表</h3>
+    <!--/*@thymesVar id="user" type=""*/-->
+
+</div>
+
+<div class="box-body">
+
+    <th:if test="${USER_SESSION.role =='ADMIN'}">
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
+                            data-target="#addOrEditModal" onclick="box()"> 新增
+                    </button>
+                </div>
+            </div>
+        </div>&nbsp&nbsp&nbsp&nbsp
+    </th:if>
+
+    <!--工具栏 数据搜索<h1 th:text="${user}"/> -->
+    <div class="box-tools pull-right">
+        <div class="has-feedback">
+            <form action="/sel" method="post">
+                用户名称：<input name="name" >&nbsp&nbsp&nbsp&nbsp
+                用户账号：<input name="author" >&nbsp&nbsp&nbsp&nbsp
+
+                <input class="btn btn-default" type="submit" value="查询">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="table-box" >
+    <!-- 数据表格 -->
+    <div th:if="${role}==1" style="text-align:center;font-weight: 500;font-size: 50px; ">管理员禁止查看患者用户信息!</div>
+    <table id="dataList" th:if="${role}==2" class="table table-bordered table-striped table-hover dataTable text-center" >
+        <thead>
+        <tr>
+            <th class="sorting">预约编号</th>
+            <th class="sorting">用户编号</th>
+            <th class="sorting">用户姓名</th>
+            <th class="sorting">医师编号</th>
+            <th class="sorting">医师姓名</th>
+            <th class="sorting">预约科室</th>
+            <th class="sorting">预约时间</th>
+            <th class="sorting">状态</th>
+            <th class="text-center">操作</th>
+        </tr>
+        </thead>
+        <tbody th:each="user : ${user}" id="ta1">
+
+        <!--/*@thymesVar id="user" type=""*/-->
+        <tr id="qwe">
+
+            <td  th:text="${user.yvyid}"> </td>
+            <td th:text="${user.userid}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.docid}" style="width: 10%"></td>
+            <td th:text="${user.docname}"></td>
+            <td >
+                <p th:if="${user.subject}==1">内科</p>
+                <p th:if="${user.subject}==2">肿瘤科</p>
+                <p th:if="${user.subject}==3">保健科</p>
+                <p th:if="${user.subject}==4">骨伤科</p>
+                <p th:if="${user.subject}==5">妇科</p>
+                <p th:if="${user.subject}==6">儿科</p>
+            </td>
+            <td th:text="${user.time}"></td>
+            <td>
+
+                <p th:if="${user.status}==1">已预约</p>
+                <p th:if="${user.status}==2">诊疗中</p>
+                <p th:if="${user.status}==3">诊疗结束</p>
+            </td>
+
+            <td class="text-center" style="width: 14%">
+
+                <button  th:if="${user.status}==1" type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                        data-target="#borrowModal" th:onclick="zl([[${user.yvyid}]])"> 诊疗
+                </button>
+                <button  th:if="${user.status}!=1" type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                          data-target="#borrowModal" onclick="zl()" disabled="true"> 诊疗
+                </button>
+
+                <button  type="button" class="btn bg-olive btn-xs" data-toggle="modal"
+                        data-target="#addOrEditModal"  th:onclick="box3([[${user.yvyid}]],[[${user.userid}]],[[${user.username}]],
+                       [[${user.docid}]] ,[[${user.docname}]],[[${user.subject}]],[[${user.time}]],[[${user.status}]])"> 编辑
+                </button>
+                <button th:if="${user.status}==3" type="button" class="btn bg-olive btn-xs" th:onclick="del([[${user.yvyid}]])">删除</button>
+                <button th:if="${user.status}!=3" type="button" class="btn bg-olive btn-xs" disabled="true">删除</button>
+
+
+
+            </td>
+        </tr>
+
+        </tbody>
+        <div id="demo2"></div>
+        <ul id="biuuu_city_list"></ul>
+    </table>
+</div>
+
+
+
+
+
+<!--诊疗界面-->
+
+    <div  class="modal" id="zl">
+
+        <div style="margin-top: 100px">
+            <div class="chat_commento " >
+                <div modal-dialog>
+                    <!-- top -->
+                    <div style="display: flex;">
+                    <div class="chat_top" style="display: flex;width: 45%">
+                        中医医馆在线诊疗
+                    </div>
+                    <div onclick="box1()" class="" style="display: flex;width: 20%">关闭</div>
+                    <div onclick="box_chuf()" class="" style="display: flex;width: 20%">开处方</div>
+                </div><!-- line -->
+                    <div class="line"></div>
+                    <!-- middle -->
+                    <div class="chat_middle" id="chat_middle_item" >
+                        <!-- 左边 -->
+
+                        <!--右边 -->
+
+                        <div id="neir"></div>
+                        <!-- l_2 -->
+                        <div class=" clearfix">
+
+                    </div>
+                    <!-- line -->
+                    <div class="line"></div></div>
+                    <!-- foot --><div>
+                    <div class="chat_foot">
+                        <!-- context -->
+                        <input id="text" class="chat_context"  cols="30" rows="10" placeholder="请输入"></input>
+                        <div class="chat_commit" id="button" onclick="send()">发送</div>
+                        <button class="chat_commit" onclick="send()">发送消息</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+        </div>
+    </div>
+<!--<div th:include="chatbox.html::kcf" ></div>-->
+<!--预约编辑界面-->
+<div th:include="box.html::eitd_yvy"   ></div>
+<!--开处方界面-->
+<div  class="modal" id="kcf">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="myModalLabel">处方信息编辑</h3>
+            </div>
+            <div class="modal-body">
+                <form id="doc_eidt" action="/zliao_addchuf" method="post">
+
+                    <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                        <tr>
+
+                            <td>处方编号</td>
+                            <td><input class="form-control" placeholder="姓名" name="cfid" id="cfid"></td>
+                            <td>诊断</td>
+                            <td><input class="form-control" placeholder="编号" name="zduan" id="zduan"></td>
+                        </tr>
+                        <tr>
+                            <td>医师编号</td>
+                            <td><input class="form-control" placeholder="医师编号" name="docid" id="docid" value="" >
+
+                            </td>
+                            <td>医师姓名</td>
+                            <td><input class="form-control" placeholder="医师姓名" name="docname" id="docname" value="" > </td>
+                        </tr>
+                        <tr>
+
+                            <td>用户编号</td>
+                            <td><input class="form-control" placeholder="用户编号" name="userid" id="userid" value="" >
+
+                            </td>
+                            <td>用户姓名</td>
+                            <td><input class="form-control" placeholder="用户姓名" name="username" id="username" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>用户年龄</td>
+                            <td><input class="form-control" placeholder="用户年龄" name="userage" id="userage" value="" >
+
+                            </td>
+                            <td>用户性别</td>
+                            <td><input class="form-control" placeholder="用户性别" name="usersex" id="usersex" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>科室</td>
+                            <td>
+                                <select class="form-control" id="subject" name="subject" >
+                                    <option value="1">内科</option>
+                                    <option value="2">肿瘤科</option>
+                                    <option value="3">保健科</option>
+                                    <option value="4">骨伤科</option>
+                                    <option value="5">妇科科</option>
+                                    <option value="6">儿科</option>
+
+                                </select>
+                            </td>
+                            <td>治疗方案</td>
+                            <td><input class="form-control" placeholder="治疗方案" name="ziliao" id="ziliao" value="" >
+
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>处方药品</td>
+                            <td><input class="form-control" placeholder="处方药品" name="chuf" id="chuf" value="" >
+                            </td>
+                            <td>时间</td>
+                            <td><input class="form-control" placeholder="时间" name="time" id="time" value="" type="date">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>状态</td>
+                            <td>
+                                <select class="form-control" id="status" name="status" >
+                                    <option value="1">已支付</option>
+                                    <option value="2">未支付</option>
+                                    <option value="3">暂离</option>
+
+                                </select>
+                            </td>
+
+                        </tr>
+                        <tr>
+
+                            <td>预约编号</td>
+                            <td><input class="form-control" placeholder="预约编号" name="yvyid" id="yvyids" value="" type="text" >
+                            </td>
+                            <  <td>预约环节</td>
+                            <td>
+                                <select class="form-control" id="yvystatus" name="yvystatus">
+                                    <option value="2">治疗中</option>
+                                    <option value="3">已结束</option>
+
+                                </select>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                    <div class="modal-footer">
+                        <button class="btn btn-success"  th:onclick="boxcf()" type="submit" name="sign">保存
+                        </button>
+                        <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" th:inline="javascript">
+    function del(yvyid){
+        var name = [[${name}]];
+        console.log(yvyid);
+        window.location.href='/yvy_del?yvyid='+yvyid;
+
+
+    };
+    function box_chuf() {
+
+        document.getElementById("kcf").style.display="block";
+        var yvyid=localStorage.getItem("yvykey");
+        document.getElementById("yvyids").value=yvyid;
+
+    }
+
+    var websocket = null;
+    function zl(yvyid) {
+   console.log(yvyid)
+localStorage.setItem("yvykey",yvyid);
+
+        document.getElementById("zl").style.display="block";
+        //判断当前浏览器是否支持WebSocket
+        if ('WebSocket'in window) {
+            var nickname = [[${role}]];
+
+            websocket = new WebSocket("ws://localhost:8080/websocket/"+nickname);
+
+        } else {
+            alert('Not support websocket')
+        }
+        //连接发生错误的回调方法
+        websocket.onerror = function() {
+            setMessageInnerHTML("error");
+        };
+        //连接成功建立的回调方法
+        websocket.onopen = function(event) {
+            setMessageInnerHTML("医师已进入诊疗界面");
+        }
+        //接收到消息的回调方法
+        websocket.onmessage = function(event) {
+            setMessageInnerHTML(event.data);
+        }
+        //连接关闭的回调方法
+        websocket.onclose = function() {
+            setMessageInnerHTML("医师已离开诊疗界面");
+        }
+        //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+        window.onbeforeunload = function() {
+            websocket.close();
+        }
+
+    }
+    function boxcf() {
+       
+        document.getElementById("kcf").style.display="none";
+
+
+
+    }
+
+    function box1(){
+
+        document.getElementById("zl").style.display="none";
+        document.getElementById("kcf").style.display="none";
+        document.getElementById("eitd_yvy").style.display="none";
+    };
+    function box3(yvyid,userid,username,docid,docname,subject,time,status){
+
+        console.log(yvyid,userid,username,docid,docname,subject,time,status);
+        document.getElementById("yvyid").value=yvyid;
+        document.getElementById("userid").value=userid;
+        document.getElementById("username").value=username;
+        document.getElementById("docid").value=docid;
+        document.getElementById("docname").value=docname;
+        document.getElementById("subject").value=subject;
+        document.getElementById("time").value=time;
+        document.getElementById("status").value=status;
+        document.getElementById("eitd_yvy").style.display="block";
+
+
+
+    };
+    function resetFrom() {
+        $("#aoe").attr("disabled",true)
+        var $vals=$("#addOrEditBook input");
+        $vals.each(function(){
+            $(this).attr("style","").val("")
+        });
+    }
+
+
+</script>
+<script src="../static/layui.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+
+    console.log([[${msg}]])
+    console.log([[${a}]])
+
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        var aa = [[${a}]]
+        if (aa != null) {
+            if([[${a}]]){
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }else {
+                layer.msg('这是测试<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }
+
+
+        }
+        //触发事件
+
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+
+        //多窗口模式 - esc 键
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 27) {
+                layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+            }
+        });
+    })
+</script>
+<script type="text/javascript" th:inline="javascript">
+
+    var websocket = null;
+    var send_message=document.getElementById("neir");
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        var name = [[${name}]];
+        var role = [[${role}]];
+
+            var ans=innerHTML;
+
+
+        var oLi=document.createElement("div");
+        oLi.setAttribute("class","chat_right");
+        oLi.innerHTML=ans;
+        send_message.append(oLi);
+        message.value="";
+    }
+    //关闭连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+    //发送消息
+    function send() {
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+</script>
+
+
+
+
+</html>

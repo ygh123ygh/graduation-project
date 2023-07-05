@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/css/chatbox.css">
+</head>
+
+<body>
+<!-- entry -->
+<div th:fragment="zl">
+    <div  class="modal" id="zl">
+<div style="margin-top: 100px">
+                <div class="chat_commento " >
+                    <div modal-dialog>
+                        <!-- top -->
+                        <div class="chat_top">
+                            中医医馆在线诊疗
+                        </div>
+                        <div onclick="box1()">关闭</div>
+                        <!-- line -->
+                        <div class="line"></div>
+                        <!-- middle -->
+                        <div class="chat_middle" id="chat_middle_item">
+                            <!-- 左边 -->
+                            <div class="chat_left clearfix">
+                                <div class="chat_left_item_1 ">杨医生</div>
+                                <div class="chat_left_item_2">
+                                    <div class="chat_time">18:57</div>
+                                    <div class="chat_left_content">
+                                        你好！请问有什么可以帮到您
+                                    </div>
+                                </div>
+                            </div>
+                            <!--右边 -->
+                            <div class="chat_right">
+                                <div class="chat_right_item_1 ">温先生</div>
+                                <div class="chat_right_item_2 ">
+                                    <div class="chat_right_time">18:59</div>
+                                    <div id="message"></div>
+                                </div>
+                            </div>
+                            <!-- l_2 -->
+                            <div class="chat_left clearfix">
+                                <div class="chat_left_item_1 ">杨医生</div>
+                                <div class="chat_left_item_2">
+                                    <div class="chat_time">18:57</div>
+                                    <div class="chat_left_content">
+                                        能说一下具体症状？
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- line -->
+                        <div class="line"></div>
+                        <!-- foot -->
+                        <div class="chat_foot">
+                            <!-- context -->
+                            <textarea id="text" class="chat_context" id="chat_context_item" cols="30" rows="10" placeholder="请输入"></textarea>
+                            <div class="chat_commit" id="button" onclick="send()">发送</div>
+                        </div>
+                    </div>
+                </div>
+</div>
+
+    </div>
+</div>
+
+<div th:fragment="kcf">
+    <div  class="modal" id="kcf">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">处方信息编辑</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="doc_eidt" action="/docup" method="post">
+
+                        <table id="addOrEditTab" class="table table-bordered table-striped" width="800px">
+
+                            <tr>
+
+                                <td>处方编号</td>
+                                <td><input class="form-control" placeholder="姓名" name="cfid" id="cfid"></td>
+                                <td>诊断</td>
+                                <td><input class="form-control" placeholder="编号" name="zduan" id="zduan"></td>
+                            </tr>
+                            <tr>
+                                <td>医师编号</td>
+                                <td><input class="form-control" placeholder="年龄" name="docid" id="docid" value="" >
+
+                                </td>
+                                <td>医师姓名</td>
+                                <td><input class="form-control" placeholder="性别" name="docname" id="docname" value="" > </td>
+                            </tr>
+                            <tr>
+
+                                <td>用户编号</td>
+                                <td><input class="form-control" placeholder="用户编号" name="userid" id="userid" value="" >
+
+                                </td>
+
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                                <td>用户姓名</td>
+                                <td><input class="form-control" placeholder="用户姓名" name="username" id="username" value="" >
+
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>用户年龄</td>
+                                <td><input class="form-control" placeholder="用户年龄" name="userage" id="userage" value="[[${name}]]" >
+
+                                </td>
+
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                                <td>用户性别</td>
+                                <td><input class="form-control" placeholder="用户性别" name="usersex" id="usersex" value="[[${name}]]" >
+
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>科室</td>
+                                <td>
+                                    <select class="form-control" id="subject" name="subject" >
+                                        <option value="1">内科</option>
+                                        <option value="2">肿瘤科</option>
+                                        <option value="3">保健科</option>
+                                        <option value="4">骨伤科</option>
+                                        <option value="5">妇科科</option>
+                                        <option value="6">儿科</option>
+
+                                    </select>
+                                </td>
+
+                                </td>
+
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                                <td>治疗方案</td>
+                                <td><input class="form-control" placeholder="治疗方案" name="ziliao" id="ziliao" value="" >
+
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>处方药品</td>
+                                <td><input class="form-control" placeholder="处方药品" name="chuf" id="chuf" value="" >
+
+                                </td>
+
+                                <!-- <td>作者</td>
+                                 <td><input class="form-control" placeholder="作者" name="author" id="ebauthor"></td>-->
+                                <td>时间</td>
+                                <td><input class="form-control" placeholder="时间" type="date" name="time" id="time" value="" >
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>状态</td>
+                                <td>
+                                    <select class="form-control" id="status" name="status" >
+                                        <option value="1">已支付</option>
+                                        <option value="2">未支付</option>
+                                        <option value="3">暂离</option>
+
+                                    </select>
+                                </td>
+
+                            </tr>
+
+
+                        </table>
+                        <div class="modal-footer">
+                            <button class="btn btn-success"  onclick="boxcf()" type="submit" name="sign">保存
+                            </button>
+                            <button class="btn btn-default"onclick="box1()" type="button" >关闭</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body><script>
+    function box1(){
+
+        document.getElementById("zl").style.display="none";
+
+    };
+    // 成功发送
+    var send_message=document.getElementById("chat_middle_item");
+    var domBtm=document.getElementById("button");
+    // 发送内容
+    var message=document.getElementById("chat_context_item");
+    domBtm.addEventListener("click",function(){
+        var str=message.value;
+        var date=new Date();
+        var hour=date.getHours();
+        var mm=date.getMinutes();
+        var time=hour+':'+mm;
+        var ans='<div class="chat_right_item_1 clearfix">温先生</div>'+
+            '<div class="chat_right_item_2">'+
+            '<div class="chat_right_time clearfix">'+time+'</div>'+
+            '<div class="chat_right_content clearfix">'+str+'</div>'
+            +'</div>';
+        var oLi=document.createElement("div");
+        oLi.setAttribute("class","chat_right");
+        oLi.innerHTML=ans;
+        send_message.append(oLi);
+        message.value="";
+    });
+
+    layui.use('layer', function () { //独立版的layer无需执行这一句
+        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+        var aa = [[${a}]]
+        if (aa != null) {
+            if([[${a}]]){
+                layer.msg('<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }else {
+                layer.msg('<br>[[${msg}]]', {
+                    time: 2000, //20s后自动关闭
+                    //btn: ['明白了', '知道了', '哦']
+                });
+            }
+
+
+        }
+        //触发事件
+
+
+        $('#layerDemo .layui-btn').on('click', function () {
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+
+
+        //多窗口模式 - esc 键
+        $(document).on('keyup', function (e) {
+            if (e.keyCode === 27) {
+                layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+            }
+        });
+    })
+</script>
+</html>

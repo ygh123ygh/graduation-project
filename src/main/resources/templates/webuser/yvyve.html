@@ -1,0 +1,355 @@
+
+<!doctype html>
+<html class="no-js" lang="" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>中医医馆官网</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/css/assets/img/favicon.ico">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="../static/css/assets/css/bootstrap-5.0.5-alpha.min.css">
+    <link rel="stylesheet" href="../static/css/assets/css/LineIcons.2.0.css">
+    <link rel="stylesheet" href="../static/css/assets/css/glightbox.min.css">
+    <link rel="stylesheet" href="../static/css/assets/css/date.css">
+    <link rel="stylesheet" href="../static/css/assets/css/selectr.min.css">
+    <link rel="stylesheet" href="../static/css/web1.css">
+    <link rel="stylesheet" href="../static/css/assets/css/tiny-slider.css">
+    <link rel="stylesheet" href="../static/css/assets/css/main.css">
+    <link rel="stylesheet" href="../static/css/AdminLTE.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/layui.css">
+
+    <script src="../static/layui.js"></script>
+</head>
+
+<body>
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- ========================= preloader start ========================= -->
+<div class="preloader">
+    <div class="loader">
+        <div class="ytp-spinner">
+            <div class="ytp-spinner-container">
+                <div class="ytp-spinner-rotator">
+                    <div class="ytp-spinner-left">
+                        <div class="ytp-spinner-circle"></div>
+                    </div>
+                    <div class="ytp-spinner-right">
+                        <div class="ytp-spinner-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- preloader end -->
+
+<!-- ========================= header start ========================= -->
+<header id="home" class="header">
+
+    <div class="header-wrapper">
+        <div class="header-top theme-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="header-top-left text-center text-md-left">
+                            <ul>
+                                <li><a href="#"><i class="lni lni-phone"></i> +463281626556</a></li>
+                                <li><a href="#"><i class="lni lni-envelope"></i> hellomedic@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="header-top-right d-none d-md-block">
+                            <ul>
+                                <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="webmain.html">
+                                <img src="../static/css/assets/img/logo/logo.svg" alt="Logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a   href="/index">主页</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="/index">关于我们</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="/index">医疗服务</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="/index">医师</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="/index">最新动态</a>
+                                    </li>
+
+
+                                </ul>
+                                <ul class="layui-nav  layui-hide layui-show-md-inline-block   "
+                                    style="background-color: white;margin-top: 10px;" >
+                                    <li class="layui-nav-item layui-hide layui-show-md-inline-block nav-item">
+                                        <a href="javascript:;" >
+                                            <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
+                                            <!--/*@thymesVar id="name" type=""*/-->
+                                            <span  style="color:#333333">用户</span>
+                                        </a>
+                                        <dl class="layui-nav-child">
+                                            <dd><a   href="#">个人信息</a></dd>
+                                            <dd><a   href="/user_yvy">我的预约</a></dd>
+                                            <dd><a   href="/user_chuf">我的处方</a></dd>
+
+                                            <!--                    <dd><a href="">Settings</a></dd>-->
+                                            <dd><a href="/userlogin">退出</a></dd>
+                                        </dl>
+                                    </li>
+
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- navbar area -->
+    </div>
+
+    <div class="slider-wrapper">
+        <!-- ========================= slider-section start ========================= -->
+
+        <!-- ========================= slider-section end ========================= -->
+    </div>
+</header>
+<!-- ========================= header end ========================= -->
+
+
+
+<!--========================= we-do-section start========================= -->
+
+<!-- ========================= team-section start ========================= -->
+<section id=team class="team-section pt-150 pb-150">
+    <div class="shape shape-5"> <img src="../static/css/assets/img/shapes/shape-2.svg" alt="" data-pagespeed-url-hash=3985024445 onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> </div>
+    <div class="shape shape-6"> <img src="../static/css/assets/img/shapes/shape-5.svg" alt="" data-pagespeed-url-hash=573556912 onload="pagespeed.CriticalImages.checkImageForCriticality(this);"> </div>
+    <div class=container >
+        <div class=row>
+            <div class="col-xl-8 mx-auto">
+                <div class="section-title text-center mb-55">
+                    <h2 class="mb-15 wow fadeInUp" data-wow-delay=.4s th:if="${doc[0].subject}==1">内科</h2>
+                    <h2 class="mb-15 wow fadeInUp" data-wow-delay=.4s th:if="${doc[0].subject}==2">肿瘤科</h2>
+                    <h2 class="mb-15 wow fadeInUp" data-wow-delay=.4s th:if="${doc[0].subject}==3">保健科</h2>
+                    <h2 class="mb-15 wow fadeInUp" data-wow-delay=.4s th:if="${doc[0].subject}==4">骨伤科</h2>
+                    <h2 class="mb-15 wow fadeInUp" data-wow-delay=.4s th:if="${doc[0].subject}==5">妇科</h2>
+                    <h2 class="mb-15 wow fadeInUp" data-wow-delay=.4s th:if="${doc[0].subject}==6">儿科</h2>
+
+                    <p class="wow fadeInUp" data-wow-delay=.6s>您的健康我们负责到底，现有医师：[[${doc.size()}]]人</p>
+                </div>
+            </div>
+        </div>
+        <!--/*@thymesVar id="doc" type=""*/-->
+        <div class=team-slider-wrapper >
+            <div class="row team-active">
+                <div class="col-xl-3 col-lg-3" th:each="doc : ${doc}" id="doc1">
+                    <div class="single-team text-center mb-85">
+                        <div class="team-img mb-50"> <img src="https://ts1.cn.mm.bing.net/th/id/R-C.13b98681e02bef3816eded219a236f09?rik=RGpH1NPbfBIt8A&riu=http%3a%2f%2fpimg.39.net%2fyiyuan%2f201904%2f16%2f6%2f1613246251824.jpg&ehk=i7xpzwdSUmkKJ7xNWg4cQaGWge88pK5CYJ76dhsKEgY%3d&risl=&pid=ImgRaw&r=0" alt="" data-pagespeed-url-hash=3082282676 onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                            <div class=specialist> <svg xmlns="http://www.w3.org/2000/svg" width=20 height=23 viewBox="0 0 51.275 58.44">
+                                <g id=noun_Stomach_5760092 transform="translate(-4.423 -0.572)">
+                                    <g id=Group_1522 data-name="Group 152" transform="translate(4.423 0.572)">
+                                        <path id=Path_70 data-name="Path 70" d="M53.065,18.13A8.5,8.5,0,0,0,46.853,13.3l-.016,0a4.4,4.4,0,0,1-3.089-2.131c-.217-.38-.417-.76-.592-1.143a11.73,11.73,0,0,1-.965-6.237,2.867,2.867,0,0,0-5.69-.7,17.283,17.283,0,0,0,1.446,9.331l.014.031c1.392,3.02-1,6.211-1.718,9.108a22.519,22.519,0,0,1-3.734,7.887,25.8,25.8,0,0,1-14.583,9.684l-.107.025a7.8,7.8,0,0,0-4.689,3.13,7.238,7.238,0,0,1-2.2,2.062A13.119,13.119,0,0,0,7.691,47.1a13.667,13.667,0,0,0-3.263,9.124,2.866,2.866,0,0,0,2.862,2.785l.082,0a2.867,2.867,0,0,0,2.785-2.946,7.737,7.737,0,0,1,1.451-4.7.982.982,0,0,1,1.589,0,7.79,7.79,0,0,0,2.5,2.149,27.063,27.063,0,0,0,12.968,3.309c.136,0,.273,0,.409,0A27.048,27.048,0,0,0,53.065,18.13ZM29.016,52.608c-.114,0-.231,0-.346,0a22.843,22.843,0,0,1-10.95-2.793,3.36,3.36,0,0,1-1.767-3.525A3.57,3.57,0,0,1,18.5,43.315c.078-.025.161-.046.245-.065s.143-.033.214-.049a30.669,30.669,0,0,0,14.072-7.92,27.067,27.067,0,0,0,7.521-13.739c.009-.049.021-.105.031-.168A4.67,4.67,0,0,1,41.844,18.8a4.824,4.824,0,0,1,3.418-1.427A4.324,4.324,0,0,1,48.79,19.13a5.251,5.251,0,0,1,.483.813A22.622,22.622,0,0,1,51.5,29.981,22.959,22.959,0,0,1,29.016,52.608Z" transform="translate(-4.423 -0.572)" fill="#fff" />
+                                        <path id=Path_711 data-name="Path 71" d="M43.851,43.011a1.578,1.578,0,0,1,1.279,2.6,19.953,19.953,0,0,1-14.8,6.97c-.1,0-.2,0-.294,0a20.012,20.012,0,0,1-8.224-1.768l-.014-.007a1.2,1.2,0,0,1-.039-2.147,1.39,1.39,0,0,1,.233-.106A33.62,33.62,0,0,0,35.155,41.34a1.562,1.562,0,0,1,1.638-.285c.111.046.22.1.329.15.777.384,1.454.953,2.242,1.315a9.56,9.56,0,0,0,4.453.495Z" transform="translate(-5.596 -3.409)" fill="#fff" />
+                                    </g>
+                                </g>
+                            </svg> </div>
+                        </div>
+                        <div class=team-info>
+                            <h5>
+
+                            <a href="#" th:text="${doc.name}"></a></h5>
+                            <span th:text="${doc.duty}"></span> </div>
+                        
+                        <button class="btn theme-btn" style="background-color: white;color: black;margin-top: 10px"
+                                th:onclick="box3()" >
+                            <p th:if="${doc.status}==1">在诊</p>
+                            <p th:if="${doc.status}==2">已预约</p>
+                            <p th:if="${doc.status}==3">诊疗中</p>
+                            <p th:if="${doc.status}==4">暂离</p>
+                           </button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ========================= team-section end ========================= -->
+<div th:include="box.html::add_yvy"   ></div>
+
+
+<!-- ========================= footer start ========================= -->
+<footer class="footer pt-100 img-bg" style="background-image:url('../static/css/assets/img/bg/footer-bg.jpg');">
+    <div class="container">
+        <div class="footer-widget-wrapper">
+            <div class="row">
+                <div class="col-xl-4 col-lg-5 col-md-6">
+                    <div class="footer-widget mb-30">
+                        <a href="webmain.html" class="logo"><img src="../static/css/assets/img/logo/logo.svg" alt=""></a>
+                        <p>Lorem ipsum dolor serit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                            labore dolore magna
+                            aliquyam erat diam voluptua.</p>
+                        <div class="footer-social-links">
+                            <ul>
+                                <li><a href="#"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-twitter-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                <li><a href="#"><i class="lni lni-instagram-original"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-6">
+                    <div class="footer-widget mb-30">
+                        <h4>Quick Link</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Doctor</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-5">
+                    <div class="footer-widget mb-30">
+                        <h4>Quick Link</h4>
+                        <ul class="footer-links">
+                            <li><a href="#">Cardiology</a></li>
+                            <li><a href="#">Neurology</a></li>
+                            <li><a href="#">Gastroenterology</a></li>
+                            <li><a href="#">Routine Checkup</a></li>
+                            <li><a href="#">Orthopedics</a></li>
+                            <li><a href="#">Dental Surgery</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-12 col-md-7">
+                    <div class="footer-widget mb-30">
+                        <h4>Medical Location</h4>
+                        <div class="map-canvas">
+                            <iframe class="map" id="gmap_canvas"
+                                    src="https://www.amap.com/" sandbox=""></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <p class="mb-0 text-center"><a target="_blank" href="http://www.mobanwang.com/" title="网页模板">网页模板</a></p>
+        </div>
+    </div>
+</footer>
+<!-- ========================= footer end ========================= -->
+
+
+<!-- ========================= scroll-top ========================= -->
+<a href="#" class="scroll-top">
+    <i class="lni lni-arrow-up"></i>
+</a>
+<!-- ========================= JS here ========================= -->
+<script src="../static/css/assets/js/bootstrap.bundle-5.0.0.alpha-min.js"></script>
+<script src="../static/css/assets/js/wow.min.js"></script>
+<script src="../static/css/assets/js/tiny-slider.js"></script>
+<script src="../static/css/assets/js/glightbox.min.js"></script>
+<script src="../static/css/assets/js/selectr.min.js"></script>
+<script src="../static/css/assets/js/date.js"></script>
+<script src="../static/css/assets/js/contact-form.js"></script>
+<script src="../static/layui.js"></script>
+<script src="../static/css/assets/js/main.js"></script>
+<script  type="text/javascript" th:inline="javascript">
+    function box1(){
+        document.getElementById("add").style.display="none";
+        document.getElementById("add_yvy").style.display="none";
+    };
+    function box3(){
+
+        //console.log('account,name,age,sex,status,email,duty,subject');
+        // document.getElementById("account11").value=account;
+        // document.getElementById("name11").value=name;
+        // document.getElementById("age11").value=age;
+        // document.getElementById("sex11").value=sex;
+        //
+        // document.getElementById("email11").value=email;
+        // document.getElementById("duty11").value=duty;
+        // document.getElementById("subject11").value=subject;
+        // document.getElementById("status11").value=status;
+        document.getElementById("add_yvy").style.display="block";
+    }
+    function zliao() {
+        console.log([[${msg}]])
+        console.log([[${a}]])
+
+        layui.use('layer', function () { //独立版的layer无需执行这一句
+            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+            //var aa = [[${a}]]
+
+            layer.msg('预约成功<br>', {
+                time: 2000, //20s后自动关闭
+                //btn: ['明白了', '知道了', '哦']
+            });
+
+            // layer.msg('这是测试<br>[[${msg}]]', {
+            // 	time: 2000, //20s后自动关闭
+            // 	//btn: ['明白了', '知道了', '哦']
+            // });
+
+
+
+
+            //触发事件
+
+
+            $('#layerDemo .layui-btn').on('click', function () {
+                var othis = $(this), method = othis.data('method');
+                active[method] ? active[method].call(this, othis) : '';
+            });
+
+
+            //多窗口模式 - esc 键
+            $(document).on('keyup', function (e) {
+                if (e.keyCode === 27) {
+                    layer.close(layer.escIndex ? layer.escIndex[0] : 0);
+                }
+            });
+        })
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../static/css/layui.css">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style type="text/css">
+
+        .imgBox{
+            border-top: 2px solid cadetblue;
+            width: 100%;
+            height: 85%;
+            margin: 0 auto;
+
+        }
+
+        .imgBox img{
+            min-width: 100%  !important;
+            height: 750px;
+            margin: 0 auto;
+            padding-top: 10px;
+            object-fit: cover;
+
+        }
+
+        .img1{
+            display: block;
+        }
+
+        .img2{
+            display: none;
+        }
+
+        .img3{
+            display: none;
+        }
+    </style>
+
+</head>
+<body style=" position: fixed;left: 205px ;">
+<div class="imgBox">
+<img  class="img-slide img1" src="https://pic.ntimg.cn/20130408/12246865_164349363337_2.jpg" alt="1">
+<img class="img-slide img2" src="https://ts1.cn.mm.bing.net/th/id/R-C.122801cb77f174489a02f5cc97d98301?rik=7CO7lArTR%2fWsDg&riu=http%3a%2f%2fwww.yljhzx.cn%2fuploadfile%2fimage%2f202010%2f20201007110337563756.jpg&ehk=yxgEvIthxaczGGw3q14rrXmbG7DHFgAERRPvrtSCWcY%3d&risl=&pid=ImgRaw&r=0" alt="2">
+<img class="img-slide img3" src="https://pic.ntimg.cn/20140522/7755667_215220408353_2.jpg" alt="3">
+</div>
+
+
+
+
+
+
+<script src="/static/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+<script>
+    var index=0;
+    //效果
+    function ChangeImg() {
+        index++;
+        var a=document.getElementsByClassName("img-slide");
+        if(index>=a.length) index=0;
+        for(var i=0;i<a.length;i++){
+            a[i].style.display='none';
+        }
+        a[index].style.display='block';
+    }
+    //设置定时器，每隔两秒切换一张图片
+    setInterval(ChangeImg,3000);
+
+</script>
+
+</body>
+</html>
